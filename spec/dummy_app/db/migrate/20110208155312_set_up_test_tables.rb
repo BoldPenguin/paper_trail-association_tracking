@@ -45,7 +45,7 @@ class SetUpTestTables < ::ActiveRecord::Migration::Current
       end
     end
 
-    create_table :versions, versions_table_options do |t|
+    create_table :versions, **versions_table_options do |t|
       t.string   :item_type, item_type_options
       t.integer  :item_id,   null: false
       t.string   :event,     null: false
@@ -83,6 +83,11 @@ class SetUpTestTables < ::ActiveRecord::Migration::Current
       t.integer :widget_id
       t.string  :name
       t.timestamps null: true, limit: 6
+    end
+
+    create_table :bizzos, force: true do |t|
+      t.integer :widget_id
+      t.string  :name
     end
 
     create_table :fluxors, force: true do |t|
@@ -214,6 +219,11 @@ class SetUpTestTables < ::ActiveRecord::Migration::Current
       t.string :body
       t.string :object_type
       t.integer :object_id
+    end
+
+    create_table :hunts, force: true do |t|
+      t.integer :predator_id
+      t.integer :prey_id
     end
   end
 

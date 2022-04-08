@@ -6,36 +6,51 @@
 # > the version from the appraisal takes precedence.
 # > https://github.com/thoughtbot/appraisal
 
+### WHEN UPDATING THESE VERSIONS DONT FORGOT TO UPDATE .github/workflows/test.yml
 pt_versions = [
-  '~>9.0', 
-  '~>10.0', 
-  'master',
+  '~>9.2', ### Likely not compatible with the new PT 12 loading mechanism
+  '~>10.0', ### Likely not compatible with the new PT 12 loading mechanism
+  '~>11.0', ### Likely not compatible with the new PT 12 loading mechanism
+  '~>12.0', 
 ]
 
 ar_versions = [
   [
-    '~>5.2.0', 
+    '~>5.2', 
     pt_versions,
   ],
   [
-    '~>6.0.0', 
-    pt_versions.select{|x| x.sub('~>', '').to_f >= 10 || x == 'master' },
+    '~>6.0', 
+    pt_versions,
+  ],
+  [
+    '~>6.1', 
+    pt_versions,
+  ],
+  [
+    '~>7.0', 
+    pt_versions,
   ],
 ]
 
+db_gems = ['sqlite3', 'mysql2', 'pg']
+
 ar_versions.each do |ar_ver, compatible_pt_versions|
   compatible_pt_versions.each do |pt_ver|
-    appraise "ar_#{ar_ver.sub('~>','')} pt_#{pt_ver.sub('~>','')}" do
-      gem "activerecord", ar_ver
+    db_gems.each do |db_gem|
+      appraise "#{db_gem}_ar_#{ar_ver.sub('~>','')} pt_#{pt_ver.sub('~>','')}" do
+        gem "activerecord", ar_ver
 
-      if pt_ver == 'master'
-        gem "paper_trail", git: 'https://github.com/paper-trail-gem/paper_trail.git'
-      else
-        gem "paper_trail", pt_ver
+        if pt_ver == 'master'
+          gem "paper_trail", git: 'https://github.com/paper-trail-gem/paper_trail.git'
+        else
+          gem "paper_trail", pt_ver
+        end
+
+        gem "rails-controller-testing"
+
+        gem db_gem
       end
-
-      gem "rails-controller-testing"
     end
-
   end
 end
