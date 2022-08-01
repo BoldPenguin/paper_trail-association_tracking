@@ -14,6 +14,13 @@ Gem::Specification.new do |s|
   s.email = "weston@westonganger.com"
   s.license = "MIT"
 
+  if s.respond_to?(:metadata)
+    s.metadata['allowed_push_host'] = 'https://rubygems.pkg.github.com'
+  else
+    raise 'RubyGems 2.0 or newer is required to protect against ' \
+       'public gem pushes.'
+  end
+
   s.files = Dir.glob("{lib/**/*}") + ['LICENSE', 'README.md', 'Rakefile', 'CHANGELOG.md']
 
   s.executables = []

@@ -12,7 +12,6 @@
 .rvmrc
 .tags
 .tags_sorted_by_file
-Gemfile.lock
 NOTES
 coverage
 gemfiles/*.lock
@@ -27,3 +26,10 @@ test/debug.log
 test/paper_trail_plugin.sqlite3.db
 vendor/*
 .DS_Store
+
+# Ignore swap files
+*.swp
+*.swo
+
+# https://yehudakatz.com/2010/12/16/clarifying-the-roles-of-the-gemspec-and-gemfile/
+Gemfile.lock

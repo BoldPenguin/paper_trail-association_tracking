@@ -33,7 +33,7 @@ jobs:
       DB: sqlite
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Install ruby
       uses: ruby/setup-ruby@v1
@@ -82,7 +82,7 @@ jobs:
       DB: mysql
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Install ruby
       uses: ruby/setup-ruby@v1
@@ -134,7 +134,7 @@ jobs:
       DB: postgres
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Install ruby
       uses: ruby/setup-ruby@v1
