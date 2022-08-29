@@ -101,6 +101,7 @@ module PaperTrailAssociationTracking
         versions.select { |version| version.event == "create" }
           .map(&:changeset)
           .pluck(assoc.foreign_key)
+          .compact
           .map { |change| assoc.klass.find_by(id: change.second) }
       end
 
