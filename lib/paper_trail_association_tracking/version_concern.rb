@@ -89,6 +89,7 @@ module PaperTrailAssociationTracking
         versions.select { |version| version.event == "update" }
           .map(&:changeset)
           .pluck(assoc.foreign_key)
+          .compact
           .flat_map do |change|
             [
               assoc.klass.find_by(id: change.first),
@@ -109,6 +110,7 @@ module PaperTrailAssociationTracking
         versions.select { |version| version.event == "destroy" }
           .map(&:changeset)
           .pluck(assoc.foreign_key)
+          .compact
           .map { |change| assoc.klass.find_by(id: change.first) }
       end
     end
